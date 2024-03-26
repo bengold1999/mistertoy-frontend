@@ -48,7 +48,6 @@ export function toyReducer(state = initialState, action = {}) {
                 toys: state.toys.map(toy => toy._id === action.toy._id ? action.toy : toy)
             }
 
-        //* Shopping toyt
         case TOGGLE_toyT_IS_SHOWN:
             return { ...state, istoyShown: !state.istoyShown }
 
