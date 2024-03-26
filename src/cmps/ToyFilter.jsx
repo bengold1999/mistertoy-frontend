@@ -30,12 +30,11 @@ export function ToyFilter({ filterBy, onSetFilter }) {
             labels: selectedLabels,
         }))
     }
-
     return (
-        <section className="Toy-filter full main-layout">
-            <form >
+        <section>
+            <form className="" >
                 <label htmlFor="name">Toy name:</label>
-                <input type="text"
+                <input className="input" type="text"
                     id="name"
                     name="txt"
                     placeholder="By name"
@@ -43,15 +42,23 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     onChange={handleChange}
                 />
 
-                <label htmlFor="inStock">In Stock:</label>
-                <input
-                    type="checkbox"
-                    id="inStock"
-                    name="inStock"
-                    value={filterByToEdit.inStock}
-                    onChange={handleChange}
-                />
-                <LabelSelector labels={labels} onLabelChange={onLabelChange} />
+                <div className="radio-sort cl-checkbox ">
+                    <label htmlFor="all">
+
+                        <input defaultChecked type="radio" name="inStock" value="all" id="all" onChange={handleChange} />
+                        All
+                    </label>
+                    <label htmlFor="done">
+
+                        <input type="radio" name="inStock" value="inStock" id="inStock" onChange={handleChange} />
+                        in stock
+                    </label>
+                    <label htmlFor="undone">
+                        <input type="radio" name="inStock" value="" id="notinStock" onChange={handleChange} />
+                        not in stock
+                    </label>
+                </div>
+                <LabelSelector selectedLabels={filterByToEdit.labels} labels={labels} onLabelChange={onLabelChange} />
             </form>
 
         </section>

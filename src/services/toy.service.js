@@ -23,6 +23,14 @@ function query(filterBy = {}, sortBy = {}) {
             if (!filterBy.txt) filterBy.txt = ''
             if (!filterBy.inStock) filterBy.inStock = ''
 
+            if (filterBy.inStock !== 'all') {
+                toysToShow = toysToShow.filter((toy) => (filterBy.inStock === 'inStock' ? toy.inStock : !toy.inStock))
+            }
+            if (filterBy.labels && filterBy.labels.length) {
+                toysToShow = toys.filter(toy =>
+                    filterBy.labels.some(label => Array.isArray(toy.labels) && toy.labels.includes(label))
+                )
+            }
             const regExp = new RegExp(filterBy.txt, 'i')
             toysToShow = toysToShow.filter(toy => regExp.test(toy.name) && (filterBy.inStock ? toy.inStock : true))
 
@@ -85,8 +93,8 @@ function getEmptyRandomtoy() {
 
 
 function getDefaultFilter() {
-    return { txt: '', labels: '', inStock: '' }
+    return { txt: '', labels: [], inStock: 'all' }
 }
 function getDefaultSort() {
-    return { type: '', desc: 1 }
+    return { type: '', dir: 1 }
 }

@@ -1,3 +1,6 @@
 export function HomePage(){
-    return <h1>hello from HomePage</h1>
+    return <section className="home flex ">
+     <img className="img-home" src="src\assets\img\home.png" alt="" />
+     <h4>"Find you perfect toy"</h4>
+     </section>
 }

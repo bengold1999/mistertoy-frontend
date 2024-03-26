@@ -1,35 +1,40 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useEffect,useState  } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
+import { ToySort } from '../cmps/ToySort.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
 import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { loadtoys, removetoyOptimistic, savetoy, setFilterBy } from '../store/actions/toy.actions.js'
+import { loadtoys, removetoyOptimistic, savetoy, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
 // import { ADD_TOY_TO_toyT } from '../store/reducers/TOY.reducer.js'
 
 
-export function ToyIndex(){
+export function ToyIndex() {
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
-   
+
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
-    useEffect(()=>{
+    useEffect(() => {
         loadtoys()
-        .catch(err => {
-            showErrorMsg('Cannot load toys!')
-        })
-    }, [filterBy])
+            .catch(err => {
+                showErrorMsg('Cannot load toys!')
+            })
+    }, [filterBy, sortBy])
 
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
     }
-    
+
+    function onSetSort(sortBy) {
+        setSortBy(sortBy)
+    }
+
 
     function onRemoveToy(toyId) {
         removetoyOptimistic(toyId)
@@ -64,24 +69,30 @@ export function ToyIndex(){
     //             showErrorMsg('Cannot update toy')
     //         })
     // }
-    console.log(toys)
+    // console.log(toys)
 
     return (
-        <div>
-            <h3>Toys App</h3>
-            <main>
-                <Link to="/toy/edit">Add toy</Link>
-                <button className='add-btn' onClick={onAddToy}>Add Random toy</button>
+        <div className=''>
+           
+            <main className='flex column  '>
+                <section className="Toy-filter full main-layout">
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+                <ToySort onSetSort={onSetSort} sortBy={sortBy} />
+                </section>
+                <div className='add-Toys flex center'>
+                    <button><Link className='add-btn' to="/toy/edit">Add toy</Link></button>
+                    <button className='add-btn' onClick={onAddToy}>Add Random toy</button>
+                </div>
+                
                 {!isLoading
                     ? <ToyList
                         toys={toys}
                         onRemoveToy={onRemoveToy}
-                        // onEditToy={onEditToy}
-                        // addTotoyt={addTotoyt}
-                        // txt={'123'}
-                        // nums={[1, 2 ,3]}
-                        // baba='hello'
+                    // onEditToy={onEditToy}
+                    // addTotoyt={addTotoyt}
+                    // txt={'123'}
+                    // nums={[1, 2 ,3]}
+                    // baba='hello'
                     />
                     : <div>Loading...</div>
                 }

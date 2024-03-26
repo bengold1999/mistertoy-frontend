@@ -12,7 +12,7 @@ import { ToyEdit } from './pages/ToyEdit.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
 
 
-import './App.css'
+import './assets/css/main.css'
 
 export function App() {
   return (

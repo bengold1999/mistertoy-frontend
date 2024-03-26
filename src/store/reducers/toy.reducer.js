@@ -14,6 +14,7 @@ export const REMOVE_TOY_FROM_toyT = 'REMOVE_TOY_FROM_toyT'
 export const CLEAR_toyT = 'CLEAR_toyT'
 
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const SET_SORT_BY = 'SET_SORT_BY'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
@@ -70,6 +71,11 @@ export function toyReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 filterBy: { ...state.filterBy, ...action.filterBy }
+            }
+        case SET_SORT_BY:
+            return {
+                ...state,
+                sortBy: { ...state.sortBy, ...action.sortBy }
             }
 
         case SET_IS_LOADING:

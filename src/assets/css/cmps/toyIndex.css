@@ -1,0 +1,12 @@
+.Toy-filter form{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.Toy-filter .label-selector{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+} 

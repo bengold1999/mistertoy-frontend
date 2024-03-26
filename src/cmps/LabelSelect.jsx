@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react"
 
-export function LabelSelector({ labels, onLabelChange }) {
-  const [selectedLabels, setSelectedLabels] = useState([])
+export function LabelSelector({ selectedLabels, labels, onLabelChange }) {
+  // const [selectedLabels, setSelectedLabels] = useState([])
 
-  useEffect(() => {
-    onLabelChange(selectedLabels)
-  }, [selectedLabels])
+  // useEffect(() => {
+  //   onLabelChange(selectedLabels)
+  // }, [selectedLabels])
 
   function handleLabelChange(event) {
     const label = event.target.value
+    let newSelectedLabels
     if (event.target.checked) {
-      setSelectedLabels(prevLabels => [...prevLabels, label])
+      newSelectedLabels = [...selectedLabels, label]
     } else {
-      setSelectedLabels(prevLabels => prevLabels.filter(l => l !== label))
+      newSelectedLabels = selectedLabels.filter(l => l !== label)
     }
+    onLabelChange(newSelectedLabels)
   }
 
   return (
-    <div className="label-selector">
+    <div className="label-selector input flex column ">
       {labels.map(label => (
         <div key={label}>
           <input
@@ -25,7 +27,7 @@ export function LabelSelector({ labels, onLabelChange }) {
             value={label}
             checked={selectedLabels.includes(label)}
             onChange={handleLabelChange}
-            id={`checkbox-${label}`}
+            id={label}
           />
           <label htmlFor={`checkbox-${label}`}>{label}</label>
         </div>

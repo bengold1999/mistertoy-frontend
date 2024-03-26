@@ -1,0 +1,38 @@
+.toy-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.toy-preview{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(240, 248, 255, 0.502);
+    border-radius: 20px;
+    padding: 10px;
+    
+}
+.toy-preview article{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.preview-img{
+ 
+    width: 150px;
+    border-radius: 30px;
+}
+
+.remove-btn{
+    border: 1px solid rgba(0, 0, 0, 0);
+    position: absolute;
+    right: 1px;
+    top: 1px;
+  }

@@ -1,3 +1,3 @@
 export function AppFooter(){
-    return <h1>footer hello!</h1>
+    return <h1></h1>
 }
