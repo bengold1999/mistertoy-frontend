@@ -14,7 +14,7 @@ export function ToyEdit(){
 
     useEffect(() => {
         if (toyId) loadToy()
-    }, [toyToEdit])
+    }, [])
 
 function loadToy() {
     toyService.getById(toyId)
@@ -36,7 +36,7 @@ function loadToy() {
         savetoy(toyToEdit)
             .then(() => {
                 showSuccessMsg('Toy Saved!')
-                navigate('/Toy')
+                navigate('/toy')
             })
             .catch(err => {
                 console.log('Had issues in Toy details', err)

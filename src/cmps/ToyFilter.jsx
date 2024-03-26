@@ -1,25 +1,38 @@
 
 import { useEffect, useRef, useState } from "react"
 import { utilService } from "../services/util.service.js"
+import { toyService } from "../services/toy.service.js"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
+import { LabelSelector } from './LabelSelect.jsx'
 
 export function ToyFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     onSetFilter = useRef(utilService.debounce(onSetFilter, 300))
+    const labels = toyService.getLabels()
+
 
     useEffectUpdate(() => {
         onSetFilter.current(filterByToEdit)
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        let { value, name: field, type } = target
-        value = type === 'number' ? +value : value
+        let { value, name: field, type } = target;
+        if (type === 'checkbox') value = target.checked
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
+    // console.log(filterByToEdit)
+
+    function onLabelChange(selectedLabels) {
+        setFilterByToEdit(prevFilter => ({
+            ...prevFilter,
+            labels: selectedLabels,
+        }))
+    }
+
     return (
-        <section className="car-filter full main-layout">
+        <section className="Toy-filter full main-layout">
             <form >
                 <label htmlFor="name">Toy name:</label>
                 <input type="text"
@@ -30,15 +43,15 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     onChange={handleChange}
                 />
 
-                <label htmlFor="maxPrice">Max price:</label>
-                <input type="number"
-                    id="maxPrice"
-                    name="maxPrice"
-                    placeholder="By max price"
-                    value={filterByToEdit.maxPrice || ''}
+                <label htmlFor="inStock">In Stock:</label>
+                <input
+                    type="checkbox"
+                    id="inStock"
+                    name="inStock"
+                    value={filterByToEdit.inStock}
                     onChange={handleChange}
                 />
-
+                <LabelSelector labels={labels} onLabelChange={onLabelChange} />
             </form>
 
         </section>

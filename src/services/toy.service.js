@@ -11,19 +11,29 @@ export const toyService = {
     remove,
     getEmptytoy,
     getDefaultFilter,
-    getEmptyRandomtoy
+    getEmptyRandomtoy,
+    getLabels,
+    getDefaultSort,
 }
+function query(filterBy = {}, sortBy = {}) {
 
-function query(filterBy = {}) {
     return storageService.query(STORAGE_KEY)
         .then(toys => {
+            let toysToShow = toys
             if (!filterBy.txt) filterBy.txt = ''
-            if (!filterBy.maxPrice) filterBy.maxPrice = Infinity
+            if (!filterBy.inStock) filterBy.inStock = ''
+
             const regExp = new RegExp(filterBy.txt, 'i')
-            return toys.filter(toy =>
-                regExp.test(toy.vendor) &&
-                toy.price <= filterBy.maxPrice
-            )
+            toysToShow = toysToShow.filter(toy => regExp.test(toy.name) && (filterBy.inStock ? toy.inStock : true))
+
+            if (sortBy.type === 'createdAt') {
+                toysToShow.sort((b1, b2) => (+sortBy.dir) * (b1.createdAt - b2.createdAt))
+            } else if (sortBy.type === 'price') {
+                toysToShow.sort((b1, b2) => (+sortBy.dir) * (b1.price - b2.price))
+            } else if (sortBy.type === 'name') {
+                toysToShow.sort((a, b) => sortBy.dir * a.name.localeCompare(b.name))
+            }
+            return toysToShow
         })
 }
 
@@ -47,8 +57,12 @@ function save(toy) {
     }
 }
 
+function getLabels() {
+    return ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
+        'Outdoor', 'Battery Powered']
+}
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
-'Outdoor', 'Battery Powered'] 
+    'Outdoor', 'Battery Powered']
 
 function getEmptytoy() {
     return {
@@ -71,5 +85,8 @@ function getEmptyRandomtoy() {
 
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '' }
+    return { txt: '', labels: '', inStock: '' }
+}
+function getDefaultSort() {
+    return { type: '', desc: 1 }
 }

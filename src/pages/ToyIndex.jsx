@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useEffect } from 'react'
+import { useEffect,useState  } from 'react'
 
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
@@ -15,6 +15,8 @@ export function ToyIndex(){
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
+    const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
+   
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(()=>{
@@ -27,7 +29,7 @@ export function ToyIndex(){
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
     }
-
+    
 
     function onRemoveToy(toyId) {
         removetoyOptimistic(toyId)
@@ -62,13 +64,14 @@ export function ToyIndex(){
     //             showErrorMsg('Cannot update toy')
     //         })
     // }
+    console.log(toys)
 
     return (
         <div>
             <h3>Toys App</h3>
             <main>
                 <Link to="/toy/edit">Add toy</Link>
-                <button className='add-btn' onClick={onAddToy}>Add Random toy ⛐</button>
+                <button className='add-btn' onClick={onAddToy}>Add Random toy</button>
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 {!isLoading
                     ? <ToyList

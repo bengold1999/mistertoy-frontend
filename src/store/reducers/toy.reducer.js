@@ -22,6 +22,7 @@ const initialState = {
     shoppingtoy: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
+    sortBy: toyService.getDefaultSort(),
     lasttoys: []
 }
 
@@ -40,7 +41,7 @@ export function toyReducer(state = initialState, action = {}) {
 
             return {
                 ...state,
-                toys: [...state.toys, action.toy]
+                toys: [action.toy,...state.toys]
             }
         case UPDATE_TOY:
             return {
