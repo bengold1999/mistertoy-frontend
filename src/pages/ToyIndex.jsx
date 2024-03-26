@@ -40,7 +40,7 @@ export function ToyIndex(){
     }
 
     function onAddToy() {
-        const toyToSave = toyService.getEmptytoy()
+        const toyToSave = toyService.getEmptyRandomtoy()
         savetoy(toyToSave)
             .then((savedtoy) => {
                 showSuccessMsg(`toy added (id: ${savedtoy._id})`)
@@ -50,18 +50,18 @@ export function ToyIndex(){
             })
     }
 
-    function onEditToy(toy) {
-        const price = +prompt('New price?')
-        const toyToSave = { ...toy, price }
+    // function onEditToy(toy) {
+    //     const price = +prompt('New price?')
+    //     const toyToSave = { ...toy, price }
 
-        savetoy(toyToSave)
-            .then((savedtoy) => {
-                showSuccessMsg(`toy updated to price: $${savedtoy.price}`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot update toy')
-            })
-    }
+    //     savetoy(toyToSave)
+    //         .then((savedtoy) => {
+    //             showSuccessMsg(`toy updated to price: $${savedtoy.price}`)
+    //         })
+    //         .catch(err => {
+    //             showErrorMsg('Cannot update toy')
+    //         })
+    // }
 
     return (
         <div>
@@ -73,8 +73,8 @@ export function ToyIndex(){
                 {!isLoading
                     ? <ToyList
                         toys={toys}
-                        onRemovetoy={onRemoveToy}
-                        onEditToy={onEditToy}
+                        onRemoveToy={onRemoveToy}
+                        // onEditToy={onEditToy}
                         // addTotoyt={addTotoyt}
                         // txt={'123'}
                         // nums={[1, 2 ,3]}

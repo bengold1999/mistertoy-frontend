@@ -10,7 +10,8 @@ export const toyService = {
     save,
     remove,
     getEmptytoy,
-    getDefaultFilter
+    getDefaultFilter,
+    getEmptyRandomtoy
 }
 
 function query(filterBy = {}) {
@@ -50,6 +51,15 @@ const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
 'Outdoor', 'Battery Powered'] 
 
 function getEmptytoy() {
+    return {
+        name: '',
+        price: 5,
+        labels: [],
+        createdAt: Date.now(),
+        inStock: true,
+    }
+}
+function getEmptyRandomtoy() {
     return {
         name: utilService.makeLorem(2),
         price: 30,
