@@ -1,6 +1,9 @@
 
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
+import logoImg from '../assets/img/logo.png'
+
+
 export function AppHeader() {
 
     const [isNavVisible, setIsNavVisible] = useState(true)
@@ -31,7 +34,7 @@ export function AppHeader() {
 
                     </nav>)}
                 </div>
-                <img className='logo' src="src\assets\img\logo.png" alt="" />
+                <img className='logo' src={logoImg} alt="" />
             </section>
         </header>
     )

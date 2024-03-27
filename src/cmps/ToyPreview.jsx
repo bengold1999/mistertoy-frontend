@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import toyImg from '../assets/img/toy.png'
 
 export function ToyPreview({ toy }) {
     return (
         <article>
-            <img className="preview-img" src="src\assets\img\toy.png" alt="" />
+            <img className="preview-img" src={toyImg} alt="" />
             <h3>{toy.name}</h3>
             <p>Price: <span>${toy.price.toLocaleString()}</span></p>
             {/* {toy.owner && <p>Owner: <Link to={`/user/${toy.owner._id}`}>{toy.owner.fullname}</Link></p>} */}
