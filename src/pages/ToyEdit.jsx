@@ -60,9 +60,9 @@ export function ToyEdit() {
         <section className="toy-edit">
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} toy</h2>
 
-            <form onSubmit={onSaveToy} >
+            <form  onSubmit={onSaveToy} >
                 <label htmlFor="name">name: </label>
-                <input type="text"
+                <input className="input" type="text"
                     name="name"
                     id="name"
                     placeholder="Enter name..."
@@ -70,7 +70,7 @@ export function ToyEdit() {
                     onChange={handleChange}
                 />
                 <label htmlFor="price">Price : </label>
-                <input type="number"
+                <input className="input" type="number"
                     name="price"
                     id="price"
                     placeholder="Enter price"
@@ -96,7 +96,7 @@ export function ToyEdit() {
                     <option value="Educational">Educational</option>
                 </select> */}
             </div>
-                <div className="radio-sort ">
+                <div className="radio-sort input">
                     <label htmlFor="inStock"> in stock?</label>
                     <select value={toyToEdit.inStock} onChange={handleChange} name="inStock" className='edit-input'>
                         <option value="true">Yes</option>
@@ -105,7 +105,7 @@ export function ToyEdit() {
                 </div>
                 <div>
                     <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
-                    <Link to="/toy">Cancel</Link>
+                    <button ><Link className="add-btn" to="/toy">Cancel</Link></button>
                 </div>
             </form>
         </section>

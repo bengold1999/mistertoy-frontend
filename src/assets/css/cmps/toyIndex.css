@@ -1,12 +1,41 @@
-.Toy-filter form{
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-}
-
-.Toy-filter .label-selector{
+.Toy-filter form {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-} 
+    align-items: center;
+    justify-content: center;
+}
+
+.Toy-filter .label-selector {
+    display: flex;
+    flex-direction: column;
+}
+
+.toy-edit {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+
+}
+
+.toy-edit form {
+    display: flex;
+    align-items: center;
+
+    text-align: center;
+    flex-direction: column;
+
+}
+
+.multi-select {
+    cursor: pointer;
+    text-align: center;
+}
+
+.title-list {
+    font-family: Lobster;
+    font-size: 40px;
+    color: rgba(1, 8, 34, 0.641);
+}

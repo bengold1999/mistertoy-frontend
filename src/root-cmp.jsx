@@ -10,6 +10,7 @@ import { store } from './store/store.js'
 import { ToyIndex } from './pages/ToyIndex.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 
 import './assets/css/main.css'
@@ -31,6 +32,7 @@ export function App() {
                           {/* <Route element={<UserDetails />} path="/user/:userId" />  */}
                       </Routes>
                   </main>
+                  <UserMsg />
                   <AppFooter />
               </section>
           </Router>

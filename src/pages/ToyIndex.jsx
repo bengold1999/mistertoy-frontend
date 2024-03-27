@@ -23,7 +23,7 @@ export function ToyIndex() {
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(() => {
-        loadtoys(filterBy,sortBy)
+        loadtoys(filterBy, sortBy)
             .catch(err => {
                 showErrorMsg('Cannot load toys!')
             })
@@ -75,18 +75,18 @@ export function ToyIndex() {
 
     return (
         <div className=''>
-           
-            <main className='flex column  '>
+            <main className='flex column '>
+                <h1 className='title-list flex center'>Our Store</h1>
                 <section className="Toy-filter full main-layout">
-                <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-                <ToySort onSetSort={onSetSort} sortBy={sortBy} />
-                <MyChart toys={toys}  />
+                    <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+                    <ToySort onSetSort={onSetSort} sortBy={sortBy} />
+                    <MyChart toys={toys} />
                 </section>
                 <div className='add-Toys flex center'>
                     <button><Link className='add-btn' to="/toy/edit">Add toy</Link></button>
                     <button className='add-btn' onClick={onAddToy}>Add Random toy</button>
                 </div>
-                
+
                 {!isLoading
                     ? <ToyList
                         toys={toys}

@@ -26,11 +26,17 @@ header .logo {
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-color: var(--primary-color);
+  background-color: rgba(0, 0, 0, 0);
+  border: solid 1px rgba(0, 0, 0, 0.033);
   color: black;
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 .main-nav a {
-  color: var(--primary-light);
+  color: var(--primary-base);
+}
+
+.main-nav a:hover{
+  color: aliceblue;
 }

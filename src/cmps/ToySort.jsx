@@ -27,11 +27,12 @@ export function ToySort({ onSetSort, sortBy }) {
     console.log(sortByToEdit)
     return (
         <form className="toy-sort">
+            Sort By
             <select className="sort-type input "
                 name="type"
                 value={sortByToEdit.type}
                 onChange={handleChange}>
-
+                
                 <option value={''}>----</option>
                 <option value="name">Name</option>
                 <option value="createdAt">Date</option>

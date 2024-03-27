@@ -7,9 +7,10 @@ export function MultiSelect({ onSetLabel, toyToEdit }) {
     const labels = toyService.getLabels()
 
 
-    return <section className="multi-select" onMouseLeave={() => setIsOptionsModalOpen(false)}>
+    return <section className="multi-select input" onMouseLeave={() => setIsOptionsModalOpen(false)}>
+        
         <div className="selected-options-container" onClick={() => setIsOptionsModalOpen(prev => !prev)}>
-            selected :
+
             {!!toyToEdit.labels.length && toyToEdit.labels.map(label => <div key={label}>{label},</div>)}
             {!toyToEdit.labels.length && <div> no labels yet</div>}
         </div>
