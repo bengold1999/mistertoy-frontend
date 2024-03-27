@@ -9,6 +9,7 @@ import { ToyList } from '../cmps/ToyList.jsx'
 import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadtoys, removetoyOptimistic, savetoy, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
+import { MyChart } from '../cmps/MyChart.jsx'
 // import { ADD_TOY_TO_toyT } from '../store/reducers/TOY.reducer.js'
 
 
@@ -17,6 +18,7 @@ export function ToyIndex() {
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
+    const labels = toyService.getLabels()
 
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
@@ -78,6 +80,7 @@ export function ToyIndex() {
                 <section className="Toy-filter full main-layout">
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 <ToySort onSetSort={onSetSort} sortBy={sortBy} />
+                <MyChart toys={toys}  />
                 </section>
                 <div className='add-Toys flex center'>
                     <button><Link className='add-btn' to="/toy/edit">Add toy</Link></button>
