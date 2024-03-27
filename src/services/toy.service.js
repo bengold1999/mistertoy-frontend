@@ -1,8 +1,9 @@
-import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
+import { httpService } from './http.service.js'
 
-const STORAGE_KEY = 'toyDB'
+
+const BASE_URL = 'toy/'
+
 
 export const toyService = {
     query,
@@ -15,53 +16,27 @@ export const toyService = {
     getLabels,
     getDefaultSort,
 }
-function query(filterBy = {}, sortBy = {}) {
-
-    return storageService.query(STORAGE_KEY)
-        .then(toys => {
-            let toysToShow = toys
-            if (!filterBy.txt) filterBy.txt = ''
-            if (!filterBy.inStock) filterBy.inStock = ''
-
-            if (filterBy.inStock !== 'all') {
-                toysToShow = toysToShow.filter((toy) => (filterBy.inStock === 'inStock' ? toy.inStock : !toy.inStock))
-            }
-            if (filterBy.labels && filterBy.labels.length) {
-                toysToShow = toys.filter(toy =>
-                    filterBy.labels.some(label => Array.isArray(toy.labels) && toy.labels.includes(label))
-                )
-            }
-            const regExp = new RegExp(filterBy.txt, 'i')
-            toysToShow = toysToShow.filter(toy => regExp.test(toy.name) && (filterBy.inStock ? toy.inStock : true))
-
-            if (sortBy.type === 'createdAt') {
-                toysToShow.sort((b1, b2) => (+sortBy.dir) * (b1.createdAt - b2.createdAt))
-            } else if (sortBy.type === 'price') {
-                toysToShow.sort((b1, b2) => (+sortBy.dir) * (b1.price - b2.price))
-            } else if (sortBy.type === 'name') {
-                toysToShow.sort((a, b) => sortBy.dir * a.name.localeCompare(b.name))
-            }
-            return toysToShow
-        })
+function query(filterBy, sortBy) {
+    return httpService.get(BASE_URL, { params: { filterBy, sortBy } })
 }
 
 function getById(toyId) {
-    return storageService.get(STORAGE_KEY, toyId)
+    return httpService.get(BASE_URL + toyId)
 }
 
 function remove(toyId) {
     // return Promise.reject('Not now!')
-    return storageService.remove(STORAGE_KEY, toyId)
+    return httpService.delete(BASE_URL + toyId)
 }
 
 
 function save(toy) {
     if (toy._id) {
-        return storageService.put(STORAGE_KEY, toy)
+        return httpService.put(BASE_URL, toy)
     } else {
         // when switching to backend - remove the next line
         // toy.owner = userService.getLoggedinUser()
-        return storageService.post(STORAGE_KEY, toy)
+        return httpService.post(BASE_URL, toy)
     }
 }
 
@@ -93,7 +68,7 @@ function getEmptyRandomtoy() {
 
 
 function getDefaultFilter() {
-    return { txt: '', labels: [], inStock: 'all' }
+    return { txt: '', labels: [], inStock: null }
 }
 function getDefaultSort() {
     return { type: '', dir: 1 }

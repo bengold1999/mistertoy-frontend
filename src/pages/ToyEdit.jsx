@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service.js"
+import { MultiSelect } from '../cmps/MultiSelect.jsx';
 
 
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
@@ -30,10 +31,19 @@ export function ToyEdit() {
         setToyToEdit((prevToy) => ({ ...prevToy, [field]: value }))
     }
 
+    function onSetLabel(label) {
+        const labels = toyToEdit.labels.includes(label) ? toyToEdit.labels.filter(l => l !== label) : [label, ...toyToEdit.labels]
+        setToyToEdit(prevToy => ({ ...prevToy, labels }))
+    }
+
     function onSaveToy(ev) {
         ev.preventDefault()
         if (!toyToEdit.price) toyToEdit.price = 30
-        savetoy(toyToEdit)
+        const newToy = {
+            ...toyToEdit,
+            inStock: (toyToEdit.inStock === 'true') ? true : false
+        }
+        savetoy(newToy)
             .then(() => {
                 showSuccessMsg('Toy Saved!')
                 navigate('/toy')
@@ -45,6 +55,7 @@ export function ToyEdit() {
     }
 
     console.log(typeof toyToEdit.inStock)
+    if (!toyToEdit) return <div>Loading...</div>
     return (
         <section className="toy-edit">
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} toy</h2>
@@ -74,17 +85,23 @@ export function ToyEdit() {
                     value={toyToEdit.labels}
                     onChange={handleChange}
                 /> */}
+                   <div>
+                <MultiSelect onSetLabel={onSetLabel} toyToEdit={toyToEdit} />
+                {/* <select value={toyToEdit.type || '1'} onChange={handleChange} name="type" className='edit-input'>
+                    <option value={'1'} disabled>
+                        Type
+                    </option>
+                    <option value="Funny">Funny</option>
+                    <option value="Adult">Adult</option>
+                    <option value="Educational">Educational</option>
+                </select> */}
+            </div>
                 <div className="radio-sort ">
-                    <label htmlFor="all">
-
-                        <input defaultChecked type="radio" name="inStock" value={true} id="all" onChange={handleChange} />
-                        in stock
-                    </label>
-                    <label htmlFor="done">
-
-                        <input type="radio" name="inStock" value='' id="inStock" onChange={handleChange} />
-                        out of stock
-                    </label>
+                    <label htmlFor="inStock"> in stock?</label>
+                    <select value={toyToEdit.inStock} onChange={handleChange} name="inStock" className='edit-input'>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
                 </div>
                 <div>
                     <button>{toyToEdit._id ? 'Save' : 'Add'}</button>

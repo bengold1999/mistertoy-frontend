@@ -17,7 +17,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        let { value, name: field, type } = target;
+        let { value, name: field, type } = target
         if (type === 'checkbox') value = target.checked
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
@@ -30,6 +30,8 @@ export function ToyFilter({ filterBy, onSetFilter }) {
             labels: selectedLabels,
         }))
     }
+
+    console.log(filterByToEdit)
     return (
         <section>
             <form className="" >
@@ -43,20 +45,15 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                 />
 
                 <div className="radio-sort cl-checkbox ">
-                    <label htmlFor="all">
-
-                        <input defaultChecked type="radio" name="inStock" value="all" id="all" onChange={handleChange} />
-                        All
-                    </label>
-                    <label htmlFor="done">
-
-                        <input type="radio" name="inStock" value="inStock" id="inStock" onChange={handleChange} />
-                        in stock
-                    </label>
-                    <label htmlFor="undone">
-                        <input type="radio" name="inStock" value="" id="notinStock" onChange={handleChange} />
-                        not in stock
-                    </label>
+                <span >In stock</span>
+                    <select
+                        onChange={handleChange}
+                        name="inStock"
+                        value={filterByToEdit.inStock || ""}>
+                        <option value=""> All </option>
+                        <option value={true}>In stock</option>
+                        <option value={false}>Out of stock</option>
+                    </select>
                 </div>
                 <LabelSelector selectedLabels={filterByToEdit.labels} labels={labels} onLabelChange={onLabelChange} />
             </form>
