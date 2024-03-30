@@ -39,3 +39,16 @@
     font-size: 40px;
     color: rgba(1, 8, 34, 0.641);
 }
+
+.message {
+    padding: 10px;
+    background-color: var(--primary-bg-btn);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.msg-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}

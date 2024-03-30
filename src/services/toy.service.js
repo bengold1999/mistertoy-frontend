@@ -15,6 +15,10 @@ export const toyService = {
     getEmptyRandomtoy,
     getLabels,
     getDefaultSort,
+    saveMsg,
+    getEmptyMsg,
+    removeMsg
+
 }
 function query(filterBy, sortBy) {
     return httpService.get(BASE_URL, { params: { filterBy, sortBy } })
@@ -29,6 +33,25 @@ function remove(toyId) {
     return httpService.delete(BASE_URL + toyId)
 }
 
+function saveMsg(toyId, msg) {
+    const url = `${BASE_URL}/${toyId}/msg`
+    return httpService.post(url, msg)
+}
+
+function removeMsg(toyId, msg) {
+    const url = `${BASE_URL}/${toyId}/msg/`
+    console.log(msg)
+    return httpService.delete(url + msg.id)
+}
+function getEmptyMsg() {
+    return {
+        msgs: [
+            {
+                txt: ''
+            }
+        ]
+    }
+}
 
 function save(toy) {
     if (toy._id) {

@@ -6,13 +6,15 @@ import logoImg from '../assets/img/logo.png'
 import { LoginSignup } from './LoginSignup.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { logout } from '../store/actions/user.actions.js'
+import Avatar from '@mui/material/Avatar';
+
 
 import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 
 export function AppHeader() {
 
     const [isNavVisible, setIsNavVisible] = useState(true)
-    // const [isUserVisible, setIsUserVisible] = useState(true)
+    const [isUserVisible, setIsUserVisible] = useState(true)
     const dispatch = useDispatch()
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
@@ -30,10 +32,10 @@ export function AppHeader() {
                 showErrorMsg('OOPs try again')
             })
     }
-    // const toggleUserBar = () => {
-    //     setIsUserVisible(!isUserVisible)
+    const toggleUserBar = () => {
+        setIsUserVisible(!isUserVisible)
 
-    // }
+    }
     function onToggleCart(ev) {
         ev.preventDefault()
         dispatch({ type: TOGGLE_CART_IS_SHOWN })
@@ -58,16 +60,20 @@ export function AppHeader() {
                 <img className='logo' src={logoImg} alt="" />
             </section>
             {/* <a onClick={onToggleCart} href="">🛒 Cart</a> */}
-            {user ? (
-                < section >
-                    <Link className='add-btn' to={`/user/${user._id}`}>Hello {user.fullname} <span></span></Link>
-                    <button onClick={onLogout}>Logout</button>
-                </ section >
-            ) : (
-                <section>
-                    <LoginSignup />
-                </section>
-            )}
+            <div>
+                {user?<Avatar className='font-larger' onClick={toggleUserBar}>{user.fullname.charAt(0)}</Avatar>:''}
+                {!isUserVisible && user &&
+                    < section className='user-low-d' >
+                        <Link className='add-btn' to={`/user/${user._id}`}>Hello {user.fullname} <span></span></Link>
+                        <button onClick={onLogout}>Logout</button>
+                    </ section >
+
+                }
+            <section>
+                {!user && <LoginSignup />}
+            </section>
+            </div>
+
         </header>
     )
 }

@@ -40,3 +40,23 @@ header .logo {
 .main-nav a:hover{
   color: aliceblue;
 }
+
+.user-low-d{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  padding: 10px;
+  background-color: var(--primary-bg-btn);
+}
+
+.login-set{
+  position: absolute;
+  background-color: aliceblue;
+  margin: 0;
+  right: 50%;
+  
+}
+.login-page{
+  position: relative;
+}

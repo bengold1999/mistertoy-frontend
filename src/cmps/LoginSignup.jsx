@@ -8,7 +8,11 @@ import { LoginForm } from './LoginForm.jsx'
 export function LoginSignup() {
 
     const [isSignup, setIsSignUp] = useState(false)
+    const [isUserLogin, setIsUserLogin] = useState(true)
+    const toggleUserLoginBar = () => {
+        setIsUserLogin(!isUserLogin)
 
+    }
     function onLogin(credentials) {
         isSignup ? _signup(credentials) : _login(credentials)
     }
@@ -27,18 +31,26 @@ export function LoginSignup() {
 
     return (
         <div className="login-page">
-            <LoginForm
-                onLogin={onLogin}
-                isSignup={isSignup}
-            />
-            <div className="btns">
-                <a href="#" onClick={() => setIsSignUp(!isSignup)}>
-                    {isSignup ?
-                        'Already a member? Login' :
-                        'New user? Signup here'
-                    }
-                </a >
-            </div>
+            <button onClick={toggleUserLoginBar}>Login</button>
+            {!isUserLogin &&
+                 <>
+                 <section className='login-set'>
+                    <LoginForm
+                        onLogin={onLogin}
+                        isSignup={isSignup}
+                    />
+                    <div className="btns">
+                        
+                        <a href="#" onClick={() => setIsSignUp(!isSignup)}>
+                            {isSignup ?
+                                'Already a member? Login' :
+                                'New user? Signup here'
+                            }
+                        </a>
+                    </div>
+                    </section>
+                    </>
+            }
         </div >
     )
 }
