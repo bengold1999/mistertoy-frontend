@@ -1,22 +1,43 @@
+import { useDispatch, useSelector } from 'react-redux'
 
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import logoImg from '../assets/img/logo.png'
+import { LoginSignup } from './LoginSignup.jsx'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { logout } from '../store/actions/user.actions.js'
 
+import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 
 export function AppHeader() {
 
     const [isNavVisible, setIsNavVisible] = useState(true)
     // const [isUserVisible, setIsUserVisible] = useState(true)
+    const dispatch = useDispatch()
+    const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
     const toggleNavBar = () => {
         setIsNavVisible(!isNavVisible)
 
     }
+
+    function onLogout() {
+        logout()
+            .then(() => {
+                showSuccessMsg('logout successfully')
+            })
+            .catch((err) => {
+                showErrorMsg('OOPs try again')
+            })
+    }
     // const toggleUserBar = () => {
     //     setIsUserVisible(!isUserVisible)
 
     // }
+    function onToggleCart(ev) {
+        ev.preventDefault()
+        dispatch({ type: TOGGLE_CART_IS_SHOWN })
+    }
 
     return (
         <header className=" flex space-between align-center">
@@ -36,6 +57,17 @@ export function AppHeader() {
                 </div>
                 <img className='logo' src={logoImg} alt="" />
             </section>
+            {/* <a onClick={onToggleCart} href="">🛒 Cart</a> */}
+            {user ? (
+                < section >
+                    <Link className='add-btn' to={`/user/${user._id}`}>Hello {user.fullname} <span></span></Link>
+                    <button onClick={onLogout}>Logout</button>
+                </ section >
+            ) : (
+                <section>
+                    <LoginSignup />
+                </section>
+            )}
         </header>
     )
 }

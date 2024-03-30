@@ -45,6 +45,7 @@ export function removetoyOptimistic(toyId) {
 }
 
 export function savetoy(toy) {
+    console.log(toy)
     const type = toy._id ? UPDATE_TOY : ADD_TOY
     return toyService.save(toy)
         .then(savedtoy => {

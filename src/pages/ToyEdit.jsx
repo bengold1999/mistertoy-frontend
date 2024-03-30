@@ -54,7 +54,6 @@ export function ToyEdit() {
             })
     }
 
-    console.log(typeof toyToEdit.inStock)
     if (!toyToEdit) return <div>Loading...</div>
     return (
         <section className="toy-edit">

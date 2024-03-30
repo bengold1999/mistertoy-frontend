@@ -32,7 +32,7 @@ function remove(toyId) {
 
 function save(toy) {
     if (toy._id) {
-        return httpService.put(BASE_URL, toy)
+        return httpService.put(BASE_URL + toy._id, toy)
     } else {
         // when switching to backend - remove the next line
         // toy.owner = userService.getLoggedinUser()
