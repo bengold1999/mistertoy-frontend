@@ -55,7 +55,7 @@ export function ToyDetails() {
             </section>
             <article className="msg-editor">
                 <h1>Messages </h1>
-                <ToyMsgs toy={toy} onMessageSaved={onMessageSaved} />
+                <ToyMsgs toy={toy} onMessageSaved={onMessageSaved} user={user} />
                 {toy.msgs && (
                     <div className="msg-container">
                         {toy.msgs.map((msg) => (
@@ -63,14 +63,14 @@ export function ToyDetails() {
                                 {/* <p>Msg id: {msg.id}</p> */}
                                 <h4> Added by : <span> {msg.by.fullname}</span></h4>
                                 <pre>Message: {msg.txt}</pre>
-                                {user && user.isAdmin ? (< button onClick={() => onDeleteMsg(msg)}>Delete</button>):''}
-                                {/* <p></p> */ }
-                                {/* <p>Msg user id: {msg.by._id}</p> */ }
+                                {user && user.isAdmin ? (< button onClick={() => onDeleteMsg(msg)}>Delete</button>) : ''}
+                                {/* <p></p> */}
+                                {/* <p>Msg user id: {msg.by._id}</p> */}
                             </article>
-                ))}
-            </div>
+                        ))}
+                    </div>
                 )}
-        </article >
+            </article >
         </>
 
     )
