@@ -10,12 +10,14 @@ import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadtoys, removetoyOptimistic, savetoy, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
 import { MyChart } from '../cmps/MyChart.jsx'
+import { storageService } from '../services/async-storage.service.js'
 // import { ADD_TOY_TO_toyT } from '../store/reducers/TOY.reducer.js'
 
 
 export function ToyIndex() {
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
+    const user = useSelector(storeState => storeState.userModule.loggedInUser)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
     const labels = toyService.getLabels()
@@ -83,14 +85,20 @@ export function ToyIndex() {
                     <MyChart toys={toys} />
                 </section>
                 <div className='add-Toys flex center'>
-                    <button><Link className='add-btn' to="/toy/edit">Add toy</Link></button>
+                    {user&&user.isAdmin ?(
+                    <>
+                    <button><Link className='add-btn' to="/toy/edit">Add toy</Link>
+                    </button>
                     <button className='add-btn' onClick={onAddToy}>Add Random toy</button>
+                     </> 
+                        ) : ''}
                 </div>
 
                 {!isLoading
                     ? <ToyList
                         toys={toys}
                         onRemoveToy={onRemoveToy}
+                        user={user}
                     // onEditToy={onEditToy}
                     // addTotoyt={addTotoyt}
                     // txt={'123'}
