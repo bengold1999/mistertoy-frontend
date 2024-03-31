@@ -19,12 +19,12 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
     toys: [],
-    istoyShown: false,
-    shoppingtoy: [],
+    isCartShown: false,
+    shoppingCart: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
     sortBy: toyService.getDefaultSort(),
-    lasttoys: []
+    lastToys: []
 }
 
 export function toyReducer(state = initialState, action = {}) {
@@ -32,11 +32,11 @@ export function toyReducer(state = initialState, action = {}) {
         case SET_TOYS:
             return { ...state, toys: action.toys }
         case REMOVE_TOY:
-            const lasttoys = [...state.toys]
+            const lastToys = [...state.toys]
             return {
                 ...state,
                 toys: state.toys.filter(toy => toy._id !== action.toyId),
-                lasttoys
+                lastToys
             }
         case ADD_TOY:
 
@@ -51,21 +51,21 @@ export function toyReducer(state = initialState, action = {}) {
             }
 
         case TOGGLE_CART_IS_SHOWN:
-            return { ...state, istoyShown: !state.istoyShown }
+            return { ...state, istoyShown: !state.isCartShown }
 
         case ADD_TOY_TO_CART:
             return {
                 ...state,
-                shoppingtoy: [...state.shoppingtoy, action.toy]
+                shoppingCart: [...state.shoppingCart, action.toy]
             }
 
         case REMOVE_TOY_FROM_CART:
-            const shoppingtoy = state.shoppingtoy.filter(toy => toy._id !== action.toyId)
-            return { ...state, shoppingtoy }
+            const shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
+            return { ...state, shoppingCart }
 
 
         case CLEAR_CART:
-            return { ...state, shoppingtoy: [] }
+            return { ...state, shoppingCart: [] }
 
         case SET_FILTER_BY:
             return {
@@ -86,7 +86,7 @@ export function toyReducer(state = initialState, action = {}) {
         case TOY_UNDO:
             return {
                 ...state,
-                toys: [...state.lasttoys]
+                toys: [...state.lastToys]
             }
 
 

@@ -36,10 +36,7 @@ export function AppHeader() {
         setIsUserVisible(!isUserVisible)
 
     }
-    function onToggleCart(ev) {
-        ev.preventDefault()
-        dispatch({ type: TOGGLE_CART_IS_SHOWN })
-    }
+  
 
     return (
         <header className=" flex space-between align-center">
@@ -54,7 +51,7 @@ export function AppHeader() {
                         <NavLink to="/" >Home</NavLink>
                         <NavLink to="/about" >About</NavLink>
                         <NavLink to="/toy" >Toys</NavLink>
-
+                        <NavLink to="/cart" >Cart</NavLink>
                     </nav>)}
                 </div>
                 <img className='logo' src={logoImg} alt="" />
@@ -65,6 +62,8 @@ export function AppHeader() {
                 {!isUserVisible && user &&
                     < section className='user-low-d' >
                         <Link className='add-btn' to={`/user/${user._id}`}>Hello {user.fullname} <span></span></Link>
+                        <span>{user.score}$</span>
+                        <NavLink to="/cart" >My cart</NavLink>
                         <button onClick={onLogout}>Logout</button>
                     </ section >
 

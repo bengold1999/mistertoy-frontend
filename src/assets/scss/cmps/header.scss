@@ -55,3 +55,14 @@ header .logo {
 .login-page{
   position: relative;
 }
+
+.cart {
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  padding: 20px;
+  top: 10px;
+  right: 10px;
+}
+.cart li button {
+  margin: 5px;
+}

@@ -5,11 +5,14 @@ import { Link, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service.js"
 import { ToyMsgs } from '../cmps/ToyMsgs.jsx'
 import toyImg from '../assets/img/toy.png'
+import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 export function ToyDetails() {
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -18,6 +21,11 @@ export function ToyDetails() {
 
     function onMessageSaved() {
         loadToy()
+    }
+
+    function addToCart(toy) {
+        dispatch({ type: ADD_TOY_TO_CART, toy })
+        showSuccessMsg('Added to Cart')
     }
 
     function loadToy() {
@@ -49,8 +57,13 @@ export function ToyDetails() {
                 <p><span>Description:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quas qui quibusdam dignissimos quisquam distinctio officiis nobis possimus rem consequatur.</p>
                 <h4>in stock : {toy.inStock ? 'yes' : 'no'}</h4>
                 <section>
-                    {user && user.isAdmin ? (<button><Link className="add-btn" to={`/toy/edit/${toy._id}`}>Edit</Link></button>) : ""}
                     <button><Link className="add-btn" to={`/toy`}>Back</Link></button>
+                    {!user ? '' :
+                        (
+                            user.isAdmin ? (<button><Link className="add-btn" to={`/toy/edit/${toy._id}`}>Edit</Link></button>) : toy.inStock && (<button className="add-btn" onClick={() => {
+                                addToCart(toy)
+                            }}>Add to Cart</button>)
+                        )}
                 </section>
             </section>
             <article className="msg-editor">

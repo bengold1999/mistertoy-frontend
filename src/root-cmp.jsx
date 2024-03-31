@@ -15,6 +15,7 @@ import { UserDetails } from './pages/UserDetails.jsx'
 
 
 import './assets/scss/main.scss'
+import { ShoppingCart } from './cmps/ShoppingCart.jsx'
 
 export function App() {
   return (
@@ -31,6 +32,8 @@ export function App() {
                           <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
                           <Route element={<ToyDetails />} path="/toy/:toyId" />
                           <Route element={<UserDetails />} path="/user/:userId" />
+                          <Route element={<ShoppingCart />} path="/cart" />
+
                           {/* <Route element={<UserDetails />} path="/user/:userId" />  */}
                       </Routes>
                   </main>

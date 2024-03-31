@@ -13,15 +13,21 @@
     gap: 10px;
     background-color: rgba(240, 248, 255, 0.502);
     border-radius: 20px;
-    padding: 10px;
+    border: 1px solid $clr2;
+    transition: 0.5s;
 
+    &:hover {
+        button {
+            transition: 0.5s;
+            border: 1px solid $clr4;
+            background-color: white;
+
+        }
+
+    }
 }
 
-.btn-preview {
-    /* position: absolute;
-    bottom: 0; */
 
-}
 
 .toy-preview article {
     @include preview-card;
@@ -62,8 +68,16 @@
 }
 
 .details-img {
-    width: 30%;
+    width: 100%;
     border-radius: 30px;
+
+    @media (min-width: 800px) {
+        width: 40%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 20%;
+    }
 }
 
 
@@ -74,7 +88,7 @@
     top: 1px;
 }
 
-.msg-editor{
+.msg-editor {
     display: grid;
     padding: 10px;
     flex-direction: column;
