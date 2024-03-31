@@ -11,15 +11,21 @@ button {
     cursor: pointer;
     transition: border-color 0.25s;
     border-color: #3131316d;
+    &:hover{
+      border-color: #ffffff;
+    }
 
+    &:focus{
+      outline: 4px auto -webkit-focus-ring-color;
+    }
+    &:focus-visible{
+      outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    
   }
-  button:hover {
-    border-color: #ffffff;
-  }
-  button:focus,
-  button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-  }
+
+
 
   .add-btn{
     color: var(--primary-color);

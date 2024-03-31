@@ -43,7 +43,7 @@ export function LoginSignup() {
                         
                         <a href="#" onClick={() => setIsSignUp(!isSignup)}>
                             {isSignup ?
-                                'Already a member? Login' :
+                                'Already a member?' :
                                 'New user? Signup here'
                             }
                         </a>

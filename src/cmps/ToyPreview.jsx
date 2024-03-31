@@ -3,14 +3,14 @@ import toyImg from '../assets/img/toy.png'
 
 export function ToyPreview({ toy }) {
     return (
-        <article className="preview-card">
-            <img className="preview-img" src={toyImg} alt="" />
+        <article className={toy.inStock ? "preview-card" : "preview-card outStock"}>
+            <img className={toy.inStock ? 'preview-img' : "preview-img outStock"} src={toyImg} alt="" />
             <h3>{toy.name}</h3>
             <p>Price: <span>${toy.price.toLocaleString()}</span></p>
             {/* {toy.owner && <p>Owner: <Link to={`/user/${toy.owner._id}`}>{toy.owner.fullname}</Link></p>} */}
             <section className="btn-preview">
-            <button><Link className="add-btn" to={`/toy/edit/${toy._id}`}>Edit</Link></button>
-            <button><Link className="add-btn" to={`/toy/${toy._id}`}>Details</Link></button>
+                <button><Link className="add-btn" to={`/toy/edit/${toy._id}`}>Edit</Link></button>
+                <button><Link className="add-btn" to={`/toy/${toy._id}`}>Details</Link></button>
             </section>
         </article>
     )

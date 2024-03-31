@@ -14,7 +14,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { UserDetails } from './pages/UserDetails.jsx'
 
 
-import './assets/css/main.css'
+import './assets/scss/main.scss'
 
 export function App() {
   return (

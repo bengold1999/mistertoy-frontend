@@ -3,6 +3,7 @@ header {
   padding-top: 0;
   border-radius: 3px;
   border-top: none;
+  
 }
 
 header .logo {
@@ -50,13 +51,7 @@ header .logo {
   background-color: var(--primary-bg-btn);
 }
 
-.login-set{
-  position: absolute;
-  background-color: aliceblue;
-  margin: 0;
-  right: 50%;
-  
-}
+
 .login-page{
   position: relative;
 }

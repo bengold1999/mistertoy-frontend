@@ -36,6 +36,7 @@ export function ToyDetails() {
 
     if (!toy) return <div>loading...</div>
     return (
+        <>
         <section className="toy-details">
             <h1>Toy name: {toy.name}</h1>
             <img className="details-img" src={toyImg} alt="" />
@@ -47,6 +48,9 @@ export function ToyDetails() {
                 <button><Link className="add-btn" to={`/toy/edit/${toy._id}`}>Edit</Link></button>
                 <button><Link className="add-btn" to={`/toy`}>Back</Link></button>
             </section>
+            </section>
+            <article className="msg-editor">
+                <h1>Messages </h1>
             <ToyMsgs toy={toy} onMessageSaved={onMessageSaved} />
             {toy.msgs && (
                 <div className="msg-container">
@@ -62,6 +66,8 @@ export function ToyDetails() {
                     ))}
                 </div>
             )}
-        </section>
+            </article>
+            </>
+       
     )
 }

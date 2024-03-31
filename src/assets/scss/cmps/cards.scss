@@ -4,7 +4,7 @@
     gap: 10px;
 }
 
-.toy-preview{
+.toy-preview {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -14,32 +14,41 @@
     background-color: rgba(240, 248, 255, 0.502);
     border-radius: 20px;
     padding: 10px;
-    
+
 }
 
-.btn-preview{
+.btn-preview {
     /* position: absolute;
     bottom: 0; */
-    
+
 }
 
-.toy-preview article{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    gap: 10px;
+.toy-preview article {
+    @include preview-card;
+
+    &.outStock {
+
+
+        @include preview-card("outStock")
+    }
 }
 
-.preview-img{
- 
-    width: 100%;
-    border-radius: 30px;
+.preview-img {
+
+    @include img-toy;
+
+    &.outStock {
+
+
+        @include img-toy("outStock")
+    }
+
+
 }
 
-.toy-details{
+
+
+.toy-details {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -47,18 +56,32 @@
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
+    padding: 10px;
+
 
 }
 
-.details-img{
+.details-img {
     width: 30%;
     border-radius: 30px;
 }
 
 
-.remove-btn{
+.remove-btn {
     border: 1px solid rgba(0, 0, 0, 0);
     position: absolute;
     right: 1px;
     top: 1px;
-  }
+}
+
+.msg-editor{
+    display: grid;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+
+
+}

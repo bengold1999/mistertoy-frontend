@@ -1,0 +1,19 @@
+@import 'setup/typography.scss';
+@import 'setup/vars.scss';
+@import 'setup/variables.scss';
+@import 'setup/mixins.scss';
+@import 'setup/functions.scss';
+
+@import 'basic/base.scss';
+@import 'basic/layout.scss';
+@import 'basic/helpers.scss';
+@import 'basic/buttons.scss';
+@import 'basic/input.scss';
+
+@import 'cmps/header.scss';
+@import 'cmps/login.scss';
+@import 'cmps/home-page.scss';
+@import 'cmps/cards.scss';
+@import 'cmps/footer.scss';
+@import 'cmps/toyIndex.scss';
+@import 'cmps/user-msg.scss';
