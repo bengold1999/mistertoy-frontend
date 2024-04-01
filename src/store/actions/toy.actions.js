@@ -3,7 +3,7 @@ import { showSuccessMsg } from "../../services/event-bus.service.js";
 import { ADD_TOY, TOY_UNDO, REMOVE_TOY, SET_TOYS, SET_FILTER_BY, SET_SORT_BY, SET_IS_LOADING, UPDATE_TOY } from "../reducers/toy.reducer.js";
 import { store } from "../store.js";
 
-export function loadtoys(filterBy,sortBy) {
+export function loadtoys(filterBy, sortBy) {
     // const filterBy = store.getState().toyModule.filterBy
     // const sortBy = store.getState().toyModule.sortBy
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
@@ -45,7 +45,7 @@ export function removetoyOptimistic(toyId) {
 }
 
 export function savetoy(toy) {
-    console.log(toy)
+    // console.log('toysave',toy);
     const type = toy._id ? UPDATE_TOY : ADD_TOY
     return toyService.save(toy)
         .then(savedtoy => {

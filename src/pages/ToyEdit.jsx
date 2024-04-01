@@ -59,7 +59,7 @@ export function ToyEdit() {
         <section className="toy-edit">
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} toy</h2>
 
-            <form  onSubmit={onSaveToy} >
+            <form onSubmit={onSaveToy} >
                 <label htmlFor="name">name: </label>
                 <input className="input" type="text"
                     name="name"
@@ -84,9 +84,9 @@ export function ToyEdit() {
                     value={toyToEdit.labels}
                     onChange={handleChange}
                 /> */}
-                   <div>
-                <MultiSelect onSetLabel={onSetLabel} toyToEdit={toyToEdit} />
-                {/* <select value={toyToEdit.type || '1'} onChange={handleChange} name="type" className='edit-input'>
+                <div>
+                    <MultiSelect onSetLabel={onSetLabel} toyToEdit={toyToEdit} />
+                    {/* <select value={toyToEdit.type || '1'} onChange={handleChange} name="type" className='edit-input'>
                     <option value={'1'} disabled>
                         Type
                     </option>
@@ -94,7 +94,7 @@ export function ToyEdit() {
                     <option value="Adult">Adult</option>
                     <option value="Educational">Educational</option>
                 </select> */}
-            </div>
+                </div>
                 <div className="radio-sort input">
                     <label htmlFor="inStock"> in stock?</label>
                     <select value={toyToEdit.inStock} onChange={handleChange} name="inStock" className='edit-input'>

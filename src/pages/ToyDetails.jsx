@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service.js"
 import { ToyMsgs } from '../cmps/ToyMsgs.jsx'
-import toyImg from '../assets/img/toy.png'
+import toyImg from '../assets/img/toy1.png'
 import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadReviews, addReview, removeReview, getActionAddReview } from '../store/actions/review.actions'
@@ -58,7 +58,7 @@ export function ToyDetails() {
         <>
             <section className="toy-details">
                 <h1>Toy name: {toy.name}</h1>
-                <img className="details-img" src={toyImg} alt="" />
+                <img className="details-img" src={toy.img ? toy.img : toyImg} alt="" />
                 <h3>price: {toy.price}$</h3>
                 <h4>labels: {toy.labels.join(',')}</h4>
                 <p><span>Description:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quas qui quibusdam dignissimos quisquam distinctio officiis nobis possimus rem consequatur.</p>

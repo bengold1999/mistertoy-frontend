@@ -76,7 +76,8 @@ function getEmptytoy() {
         price: 5,
         labels: [],
         createdAt: Date.now(),
-        inStock: true,
+        inStock: "true",
+        img: utilService.getRandomImg()
     }
 }
 function getEmptyRandomtoy() {
@@ -86,9 +87,9 @@ function getEmptyRandomtoy() {
         labels: ['Doll', 'Battery Powered', 'Baby'],
         createdAt: Date.now(),
         inStock: true,
+        img: utilService.getRandomImg()
     }
 }
-
 
 function getDefaultFilter() {
     return { txt: '', labels: [], inStock: null }

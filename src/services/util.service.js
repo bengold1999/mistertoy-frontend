@@ -5,7 +5,8 @@ export const utilService = {
     loadFromStorage,
     saveToStorage,
     animateCSS,
-    debounce
+    debounce,
+    getRandomImg
 }
 
 function makeId(length = 6) {
@@ -28,6 +29,12 @@ function makeLorem(size = 100) {
         txt += words[Math.floor(Math.random() * words.length)] + ' '
     }
     return txt
+}
+
+
+function getRandomImg(){
+    let img =`src/assets/img/toy${getRandomIntInclusive(1,3)}.png`
+    return img
 }
 
 function getRandomIntInclusive(min, max) {
