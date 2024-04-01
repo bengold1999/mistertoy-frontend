@@ -52,6 +52,7 @@ export function AppHeader() {
                         <NavLink to="/about" >About</NavLink>
                         <NavLink to="/toy" >Toys</NavLink>
                         <NavLink to="/cart" >Cart</NavLink>
+                        <NavLink to="/review" >R&G</NavLink>
                     </nav>)}
                 </div>
                 <img className='logo' src={logoImg} alt="" />

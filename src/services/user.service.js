@@ -12,10 +12,17 @@ export const userService = {
     getById,
     getLoggedinUser,
     updateScore,
-    getEmptyCredentials
+    getEmptyCredentials,
+    getUsers,
+    remove
 }
-
-
+function remove(userId) {
+    return httpService.delete(`user/${userId}`)
+}
+function getUsers() {
+    // return storageService.query('user')
+    return httpService.get(`user`)
+}
 function login({ username, password }) {
 
     return httpService.post(BASE_URL + 'login', { username, password })
@@ -45,8 +52,9 @@ function logout() {
 
 function updateScore(diff) {
     let user = getLoggedinUser()
-    console.log(user)
+
     if (user.score + diff < 0) return Promise.reject('No credit')
+    user.score = getLoggedinUser().score + diff
     return httpService.put(`user/${user._id}`, user)
         .then(user => {
             _setLoggedinUser(user)
@@ -66,7 +74,7 @@ function getLoggedinUser() {
 }
 
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname,username:user.username, isAdmin: user.isAdmin, password: user.password, createdAt: user.createdAt, score: user.score }
+    const userToSave = { _id: user._id, fullname: user.fullname, username: user.username, isAdmin: user.isAdmin, createdAt: user.createdAt, score: user.score }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }

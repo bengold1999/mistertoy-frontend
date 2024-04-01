@@ -9,6 +9,8 @@ export function ShoppingCart() {
     const dispatch = useDispatch()
     const shoppingCart = useSelector(storeState => storeState.toyModule.shoppingCart)
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
+  
+
 
     console.log(shoppingCart)
     function removeFromCart(toyId) {

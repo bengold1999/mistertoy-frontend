@@ -1,7 +1,19 @@
 import { userService } from "../../services/user.service.js"
 import { CLEAR_CART } from "../reducers/toy.reducer.js"
-import { SET_USER, SET_USER_SCORE } from "../reducers/user.reducer.js"
+import { SET_USER, SET_USER_SCORE, SET_USERS, SET_WATCHED_USER } from "../reducers/user.reducer.js"
 import { store } from "../store.js"
+
+
+export async function loadUsers() {
+    try {
+        const users = await userService.getUsers()
+        store.dispatch({ type: SET_USERS, users })
+    } catch (err) {
+        console.log('UserActions: err in loadUsers', err)
+    } finally {
+    }
+}
+
 
 export function login(credentials) {
     return userService.login(credentials)
@@ -45,4 +57,14 @@ export function checkout(diff) {
             console.log('user actions -> Cannot checkout', err)
             throw err
         })
+}
+
+export async function loadUser(userId) {
+    try {
+        const user = await userService.getById(userId)
+        store.dispatch({ type: SET_WATCHED_USER, user })
+    } catch (err) {
+        showErrorMsg('Cannot load user')
+        console.log('Cannot load user', err)
+    }
 }
